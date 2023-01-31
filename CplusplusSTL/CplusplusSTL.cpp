@@ -8,6 +8,8 @@
 #include <stack>
 #include <queue>
 #include <set>
+#include <unordered_set>
+#include <map>
 using namespace std;
 
 
@@ -399,6 +401,134 @@ void explainSet() {
     cout << "upper bound " << *it22 << endl;
 }
 
+void explainMultiSet() {
+    //same as set
+    //but stores duplicates
+    multiset<int>ms;
+    ms.insert(1); //{1}
+    ms.insert(1);//{1,1}
+    ms.insert(1);//{1,1}
+
+
+    for (auto itr=  ms.begin(); itr != ms.end(); ++itr) {
+        cout << *itr << " ";
+    }
+
+    cout << endl;
+    
+    ms.erase(1); //all 1's are erased
+
+
+    for (auto itr = ms.begin(); itr != ms.end(); ++itr) {
+        cout << *itr << " "<<"line421";
+    }
+    cout << endl;
+
+    ms.insert(1); //{1}
+    ms.insert(1);//{1,1}
+    ms.insert(1);//{1,1}
+    int cnt = ms.count(1);
+
+    //only a single one erased because it erases address
+    ms.erase(ms.find(1));
+
+
+    for (auto itr = ms.begin(); itr != ms.end(); ++itr) {
+        cout << *itr << " "<<"line435";
+    }
+    cout << endl;
+
+    ms.erase(ms.find(1), ms.find(1));
+
+    for (auto itr = ms.begin(); itr != ms.end(); ++itr) {
+        cout << *itr << " "<<"line442";
+    }
+    cout << endl;
+    
+
+}
+
+//unique but not sorted
+void  explainUnOrderedMultiSet() {
+    //lower_bound and upper_bound functions does not works
+    //rest all functions are same as above it does not stores in any
+    //particular order it has a better complexity 
+    //than set in most cases , except some when collision occurs
+    unordered_set<int> ust;
+
+   
+    ust.insert(1); //{1}
+    ust.insert(1);//{1,1}
+    ust.insert(2);//{1,1}
+
+
+    for (auto itr = ust.begin(); itr != ust.end(); ++itr) {
+        cout << *itr << " ";
+    }
+
+    cout << endl;
+
+    ust.erase(1); //all 1's are erased
+
+
+    for (auto itr = ust.begin(); itr != ust.end(); ++itr) {
+        cout << *itr << " " << "line421";
+    }
+    cout << endl;
+
+    ust.insert(1); //{1}
+    ust.insert(2);//{1,2}
+    ust.insert(3);//{1,2,3}
+    ust.insert(5); //{1}
+    ust.insert(77);//{1,2}
+    ust.insert(55);//{1,2,3}
+
+    int cnt = ust.count(1);
+
+    //only a single one erased because it erases address
+    ust.erase(ust.find(1));
+
+
+    for (auto itr = ust.begin(); itr != ust.end(); ++itr) {
+        cout << *itr << " " << "line435 ";
+    }
+    cout << endl;
+
+    ust.erase(ust.find(1), ust.find(1));
+
+    for (auto itr = ust.begin(); itr != ust.end(); ++itr) {
+        cout << *itr << " " << "line442 ";
+    }
+    cout << endl;
+
+}
+
+
+void explainMap() {
+
+    map<int, int> mpp3;
+
+    map<int, pair<int, int>>mpp2;
+
+    map<pair <int, int>, int>mpp;
+
+    mpp3[1] = 2;
+
+    mpp3.insert({ 3,1 });
+
+    mpp3.insert({ 2,4 });
+
+    mpp[{2, 3}] = 10;
+
+    for (auto it : mpp) {
+        cout << it.first << " " << &it.second << endl;
+    }
+
+
+
+
+}
+
 int main()
 {
     /*
@@ -418,7 +548,10 @@ int main()
     //explainStack();
    // explainQueue();
     //explainpriorityQueue();
-    explainSet();
+   // explainSet();
+    //explainMultiSet();
+    //explainUnOrderedMultiSet();
+    explainMap();
 
 }
 
