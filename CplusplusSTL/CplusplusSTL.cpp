@@ -6,6 +6,8 @@
 #include <list>
 #include <deque>
 #include <stack>
+#include <queue>
+#include <set>
 using namespace std;
 
 
@@ -274,6 +276,129 @@ void explainStack() {
 
 }
 
+void explainQueue() {
+
+    queue<int>q;
+    q.push(1);
+    q.push(2);
+    q.emplace(4);
+
+    q.back() += 5;
+
+    cout << q.back();
+
+
+    cout << q.front();
+
+    q.pop();
+
+    cout << q.front();
+
+}
+
+void  explainpriorityQueue(){
+    //maximum value priority queue (max HEAP)
+    priority_queue<int>pq;
+
+    pq.push(5); //{5}
+    pq.push(2); //{2,5}
+    pq.push(8);//{2,5,8}
+    pq.emplace(10);//{2,5,8,10}
+
+    cout << pq.top(); // 10
+    
+    //minimum value priority queue (min HEAP)
+    priority_queue<int , vector<int>,greater<int>> pq1;
+    pq1.push(5); //{5}
+    pq1.push(2); //{2,5}
+    pq1.push(8); //2,5,8}
+
+    cout << pq1.top();
+
+
+}
+//stores everything in a sorted order and unique values
+void explainSet() {
+
+    set<int>st;
+    st.insert(1);//{1}
+    st.emplace(2);//{1,2}
+    st.insert(2);//{1,2}
+    st.insert(4);//{1,2,4}
+    st.insert(3);//{1,2,3,4}
+
+
+    for (auto it = st.begin(); it !=
+        st.end(); ++it)
+        cout << ' ' << *it;
+    //functionality of insert in  vector
+    // can be used also that only increases efficiency
+  //begin,end,rbegin,rend,clear,insert,size,
+
+    
+    
+    auto it = st.find(3); //it return address of that element
+
+    cout << ' ' << &it << "line 342";
+   
+    auto itt = st.find(6); //it return set.end()
+   
+    cout << ' ' << &itt << "line 346";
+
+    st.erase(4); //erases 4
+
+
+    for (auto it = st.begin(); it !=
+        st.end(); ++it)
+        cout << ' ' << *it;
+    cout << endl;
+    int cnt = st.count(1); // if exists it will give 1 or 0 otherwise
+
+    cout << cnt << "line357" << endl;
+    auto ittt = st.find(3);
+    st.erase(ittt);
+    
+
+   // {1,2,3}
+    
+    
+    auto it1 = st.find(2);
+    auto it2 = st.find(3);
+    st.erase(it1,it2); // {1}
+    
+    for (auto it = st.begin(); it !=
+        st.end(); ++it)
+        cout << ' ' << *it;
+
+    cout << endl;
+    //lower_bound() and upper_bound() function works in the same way
+    //as in vector it does
+
+   
+    
+    st.insert(4);//{1,4}
+    st.insert(2);//{1,2,4}
+    st.insert(6);//{1,2,4}
+
+    //lowerbound returns if the first occurence of the element occurs otherwise it returns
+    // next imediate greater element than given
+    auto it11 = st.lower_bound(3);
+
+
+    //upperbound it never  returns the element that it points to it always returns next greater element than 4 
+  
+    auto it22 = st.upper_bound(4);
+    
+    for (auto it = st.begin(); it !=
+        st.end(); ++it)
+        cout << ' ' << *it ;
+    cout << endl;
+  
+    cout << "lower bound " << *it11 << endl;
+
+    cout << "upper bound " << *it22 << endl;
+}
+
 int main()
 {
     /*
@@ -290,9 +415,13 @@ int main()
      //explainVector();
     // explainList();
     // explainDeque();
-    explainStack();
+    //explainStack();
+   // explainQueue();
+    //explainpriorityQueue();
+    explainSet();
 
 }
+
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
 // Debug program: F5 or Debug > Start Debugging menu
