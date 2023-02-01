@@ -1,7 +1,7 @@
 // C++STL.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
-
 #include <iostream>
+#include<bits/stdc++.h>
 #include <vector>
 #include <list>
 #include <deque>
@@ -10,6 +10,8 @@
 #include <set>
 #include <unordered_set>
 #include <map>
+#include <unordered_map>
+
 using namespace std;
 
 
@@ -520,12 +522,178 @@ void explainMap() {
 
     mpp[{2, 3}] = 10;
 
-    for (auto it : mpp) {
-        cout << it.first << " " << &it.second << endl;
+    
+    for (auto itr : mpp3) {
+        cout << itr.first << " " << itr.second << endl;
+    }
+    
+
+    cout << mpp3[1] << endl; // 2
+
+    cout << mpp3[5]<<endl; // 0 
+
+    auto itt = mpp3.find(3);
+   // cout << *(itt).second;
+    for (auto itt : mpp3) {
+        cout << itt.first << " " << itt.second << endl;
     }
 
+    cout << endl;
+
+    auto it = mpp3.find(5); //point to after the map
+    cout << &it <<endl;
+
+    auto itub = mpp3.lower_bound(2);
+    
+    auto itlb = mpp3.upper_bound(3);
 
 
+    cout << "lower bound " << &itub << endl;
+
+    cout << "upper bound " << &itlb << endl;
+
+
+    //erase,swap,size empty ,are same as above
+
+
+
+
+}
+
+void explainMultiMap(){
+    //you can store multiple keys duplicates key are allowed in a sorted way
+    //{1,2}
+    //{{1,3
+    
+    
+   
+    multimap<int, int> mp;
+
+    // insert elements in random order 
+    mp.insert({ 2, 30 });
+    mp.insert({ 1, 40 });
+    mp.insert({ 3, 60 });
+    mp.insert({ 2, 20 });
+    mp.insert({ 5, 50 });
+
+    // prints the elements 
+    cout << "KEY\tELEMENT\n";
+    for (auto itr = mp.begin(); itr != mp.end(); ++itr) {
+        cout << itr->first
+            << '\t' << itr->second << '\n';
+    }
+    
+  
+}
+
+//duplicate keys are not  allowed 
+//it is not in sorted order its in randomized order
+void explainUnOrderedMap() {
+    unordered_map<string, int> umap;
+
+    // inserting values by using [] operator 
+    umap["GeeksforGeeks"] = 10;
+    umap["Practice"] = 20;
+    umap["Contribute"] = 30;
+
+    // Traversing an unordered map 
+    for (auto x : umap)
+        cout << x.first << " " <<
+        x.second << endl;
+}
+
+//p1{}    p2{}
+bool comp(pair<int, int> p1, pair<int, int> p2) {
+    if (p1.second < p2.second) return true;
+    if (p1.second > p2.second) return false;
+    //if they are same
+    if (p1.first > p2.first) return true;
+    return false;
+
+
+
+
+}
+
+//Algorithms
+void explainExtra() {
+    //sorting array
+    int a[] = { 2,1,4,22,5,6,333,3 };
+    sort(a, a + 8);
+    for (int i = 0; i < (sizeof(a) / sizeof(int)); i++)
+    cout << a[i] <<" ";
+    cout << endl;
+
+
+    cout << "Vector";
+    //vector
+    vector <int>v;
+    v.push_back(55);
+    v.emplace_back(2);
+    v.emplace_back(1);
+    v.push_back(0);
+
+
+
+    sort(v.begin(), v.end());
+
+    for (auto it = v.begin(); it != v.end(); it++) {
+        cout << *(it) << " ";
+    }
+    cout << endl;
+
+
+    int a1[] = { 22,11,5,2,0,1 }; //{ 22,11,5,2,0,1 }
+    sort(a1 + 1, a1 + 4); //{ 22 ,2 ,5, 11, 0 1} only specific position of arr will be sorted
+    for (int i = 0; i < (sizeof(a1) / sizeof(int)); i++)
+        cout << a1[i] << " ";
+    cout << endl;
+
+    //sort in descending order
+    int arr[] = { 22,11,5,2,0,1 }; //{ 22,11,5,2,0,1 }
+    sort(arr, arr + 6, greater<int>()); //{ 22 ,2 ,5, 11, 0 1} only specific position of arr will be sorted
+    for (int i = 0; i < (sizeof(arr) / sizeof(int)); i++)
+        cout << arr[i] << " ";
+    cout << endl;
+
+
+
+    //based on our sorting order
+    pair<int, int> pa[] = { {1,2},{2,1},{4,1} };
+   
+    //sort it according to second element {2,1},{4,1},{1,2}
+    //if second element is same , then sort //here second element is same 1 1 so
+    //it according to first element but in descending order {4,1},{2,1}{1,2}
+
+    //using custom comp srting order
+    sort(pa, pa + 3, comp);
+   
+    for (auto iter : pa) {
+        std::cout << "First: " << iter.first << ", Second: "
+            << iter.second << std::endl;
+    }
+
+    //int n = 5;
+    //cout << "Count of 1s in binary of " << n << " is " << __builtin_popcount(n);
+   //int num = 7;
+    //int cnt = __builtin_popcount(num);
+   // int cnt = __builtin_popcount();
+   // cout << cnt << endl;
+
+   // long long num = 165786578687;
+   // int cnt = __builtin_popcountll(num);
+
+
+    string s = "123";
+    do {
+
+        cout << s << endl;
+
+    } while (next_permutation(s.begin(), s.end()));
+
+    int max[] = { 2,33,500,1,2000,5000 };
+    int maxi = *max_element(max, max + 6);
+    cout << maxi;
 
 }
 
@@ -541,18 +709,22 @@ int main()
 
     std::cout << "Hello World!\n";
     */
-    // explainPair();
-     //explainVector();
-    // explainList();
-    // explainDeque();
-    //explainStack();
-   // explainQueue();
-    //explainpriorityQueue();
-   // explainSet();
-    //explainMultiSet();
-    //explainUnOrderedMultiSet();
+     explainPair();
+     explainVector();
+     explainList();
+     explainDeque();
+     explainStack();
+    explainQueue();
+    explainpriorityQueue();
+    explainSet();
+    explainMultiSet();
+    explainUnOrderedMultiSet();
     explainMap();
+    explainMultiMap();
+    explainUnOrderedMap();
+    explainExtra();
 
+    return 0;
 }
 
 
